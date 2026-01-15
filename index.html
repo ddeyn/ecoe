@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الموسوعة الاقتصادية الشاملة | شرح وتحليل</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a', 
+                            primary: '#1d4ed8', 
+                            secondary: '#0ea5e9',
+                            accent: '#f59e0b',
+                            success: '#10b981',
+                            danger: '#ef4444',
+                            light: '#f8fafc', 
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f1f5f9;
+            scroll-behavior: smooth;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4 { font-weight: 800; }
+        p { line-height: 1.8; }
+
+        /* Cards */
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 24px;
+        }
+        
+        /* Symbol Boxes */
+        .symbol-card {
+            border-top: 5px solid;
+            transition: transform 0.2s;
+        }
+        .symbol-card:hover { transform: translateY(-3px); }
+
+        /* Lists in Summary */
+        .ashraf-list li {
+            margin-bottom: 12px;
+            padding-right: 24px;
+            position: relative;
+            color: #334155;
+            font-weight: 500;
+        }
+        .ashraf-list li::before {
+            content: "•";
+            color: #1d4ed8;
+            font-size: 1.5em;
+            position: absolute;
+            right: 0;
+            top: -5px;
+        }
+
+        /* Sidebar Links */
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: #475569;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-weight: 700;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            background-color: #dbeafe;
+            color: #1e40af;
+            border-right: 4px solid #1e40af;
+        }
+        .sidebar-link i { margin-left: 12px; width: 24px; text-align: center; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="hidden lg:flex flex-col w-80 bg-white border-l border-slate-200 h-screen sticky top-0 overflow-y-auto p-6 shadow-xl z-50">
+            <div class="mb-8 text-center">
+                <div class="w-20 h-20 bg-brand-primary text-white rounded-2xl flex items-center justify-center mx-auto mb-4 text-4xl shadow-lg">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                </div>
+                <h1 class="text-2xl font-black text-brand-dark">الموسوعة الاقتصادية</h1>
+                <p class="text-sm text-slate-500 mt-2 font-bold">شرح المنهج + تحليل الامتحانات</p>
+            </div>
+
+            <nav class="space-y-2 flex-1">
+                <a href="#symbols" class="sidebar-link active" onclick="setActive(this)">
+                    <i class="fa-solid fa-calculator text-brand-accent"></i> فك شفرة الرموز
+                </a>
+                <a href="#summary" class="sidebar-link" onclick="setActive(this)">
+                    <i class="fa-solid fa-book-open text-brand-primary"></i> ملخص الاقتصاد الزراعي
+                </a>
+                <a href="#analysis" class="sidebar-link" onclick="setActive(this)">
+                    <i class="fa-solid fa-microscope text-brand-danger"></i> تحليل بنك الأسئلة
+                </a>
+                <a href="#micro" class="sidebar-link" onclick="setActive(this)">
+                    <i class="fa-solid fa-shop text-brand-success"></i> شرح الاقتصاد الجزئي
+                </a>
+                <a href="#macro" class="sidebar-link" onclick="setActive(this)">
+                    <i class="fa-solid fa-globe text-brand-secondary"></i> شرح الاقتصاد الكلي
+                </a>
+            </nav>
+
+            <div class="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-100 text-center">
+                <p class="text-xs text-blue-600 font-bold mb-1">إعداد وتلخيص</p>
+                <h3 class="font-black text-blue-900 text-lg">عبدالرحمن احمد محمد 780</h3>
+            </div>
+        </aside>
+
+        <!-- Mobile Header -->
+        <div class="lg:hidden bg-white p-4 shadow-md sticky top-0 z-50 flex justify-between items-center">
+            <h1 class="font-black text-lg text-brand-dark">الموسوعة الاقتصادية</h1>
+            <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-brand-primary p-2">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b p-4 space-y-3 sticky top-16 z-40 shadow-lg">
+            <a href="#symbols" class="block p-3 font-bold hover:bg-slate-50 rounded border-b">فك شفرة الرموز</a>
+            <a href="#summary" class="block p-3 font-bold hover:bg-slate-50 rounded border-b">ملخص الاقتصاد الزراعي</a>
+            <a href="#analysis" class="block p-3 font-bold hover:bg-slate-50 rounded border-b">تحليل بنك الأسئلة</a>
+            <a href="#micro" class="block p-3 font-bold hover:bg-slate-50 rounded border-b">الاقتصاد الجزئي</a>
+            <a href="#macro" class="block p-3 font-bold hover:bg-slate-50 rounded">الاقتصاد الكلي</a>
+            <div class="p-3 bg-blue-50 rounded text-center font-bold text-blue-900">
+                إعداد: عبدالرحمن احمد محمد 780
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4 lg:p-8 max-w-6xl mx-auto w-full">
+            
+            <!-- SECTION 1: SYMBOLS (فك الشفرة) -->
+            <section id="symbols" class="mb-16 scroll-mt-24">
+                <div class="flex items-center gap-4 mb-8 bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                    <span class="w-12 h-12 bg-brand-accent text-white rounded-lg flex items-center justify-center text-2xl shadow-md">
+                        <i class="fa-solid fa-key"></i>
+                    </span>
+                    <div>
+                        <h2 class="text-3xl font-black text-slate-800 m-0">فك شفرة الرموز (أساسيات الامتحان)</h2>
+                        <p class="text-slate-500 font-bold">كل الرموز دي بتيجي في الامتحان في شكل مسائل أو صح وخطأ.</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    
+                    <!-- م ح س -->
+                    <div class="content-card symbol-card border-blue-600">
+                        <div class="flex justify-between items-start border-b border-slate-100 pb-3 mb-3">
+                            <div>
+                                <h3 class="text-2xl font-black text-blue-700">م ح س</h3>
+                                <p class="text-sm font-bold text-slate-500">الميل الحدي للاستهلاك</p>
+                            </div>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-black text-sm">MPC</span>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="text-slate-700"><strong>المعنى:</strong> معدل التغير في الاستهلاك نتيجة التغير في الدخل (لو دخلك زاد جنيه، هتصرف منه كام؟).</p>
+                            <div class="bg-blue-50 p-3 rounded-lg border border-blue-200 text-center">
+                                <span class="block text-xs text-blue-600 font-bold mb-1">القانون الهام جداً:</span>
+                                <strong class="text-xl text-blue-900">م ح س + م ح خ = 1</strong>
+                            </div>
+                            <div class="bg-amber-50 p-3 rounded-lg border border-amber-200 text-sm text-amber-900">
+                                <i class="fa-solid fa-lightbulb text-amber-500 ml-1"></i>
+                                <strong>سؤال امتحان:</strong> إذا كان م ح س = 0.7، فإن م ح خ = 0.3 (لأن مجموعهم لازم يساوي 1).
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- م ح خ -->
+                    <div class="content-card symbol-card border-green-600">
+                        <div class="flex justify-between items-start border-b border-slate-100 pb-3 mb-3">
+                            <div>
+                                <h3 class="text-2xl font-black text-green-700">م ح خ</h3>
+                                <p class="text-sm font-bold text-slate-500">الميل الحدي للادخار</p>
+                            </div>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full font-black text-sm">MPS</span>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="text-slate-700"><strong>المعنى:</strong> معدل التغير في الادخار نتيجة التغير في الدخل (لو دخلك زاد جنيه، هتحوش منه كام؟).</p>
+                            <div class="bg-green-50 p-3 rounded-lg border border-green-200 text-center">
+                                <span class="block text-xs text-green-600 font-bold mb-1">القانون الهام جداً:</span>
+                                <strong class="text-xl text-green-900">مضاعف الاستثمار = 1 ÷ م ح خ</strong>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg border border-red-200 text-sm text-red-900">
+                                <i class="fa-solid fa-triangle-exclamation text-red-500 ml-1"></i>
+                                <strong>تريكة امتحان:</strong> المضاعف هو مقلوب الميل الحدي <span class="underline">للادخار</span> وليس الاستهلاك.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- م م س -->
+                    <div class="content-card symbol-card border-purple-600">
+                        <div class="flex justify-between items-start border-b border-slate-100 pb-3 mb-3">
+                            <div>
+                                <h3 class="text-2xl font-black text-purple-700">م م س</h3>
+                                <p class="text-sm font-bold text-slate-500">الميل المتوسط للاستهلاك</p>
+                            </div>
+                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full font-black text-sm">APC</span>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="text-slate-700"><strong>المعنى:</strong> نسبة الاستهلاك الكلي إلى الدخل الكلي (بتصرف كام في المتوسط من دخلك كله).</p>
+                            <div class="bg-purple-50 p-3 rounded-lg border border-purple-200 text-center">
+                                <span class="block text-xs text-purple-600 font-bold mb-1">القانون:</span>
+                                <strong class="text-xl text-purple-900">م م س + م م خ = 1</strong>
+                            </div>
+                            <p class="text-xs text-slate-500 text-center font-bold">"المتوسط يكمل المتوسط"</p>
+                        </div>
+                    </div>
+
+                    <!-- م م خ -->
+                    <div class="content-card symbol-card border-indigo-600">
+                        <div class="flex justify-between items-start border-b border-slate-100 pb-3 mb-3">
+                            <div>
+                                <h3 class="text-2xl font-black text-indigo-700">م م خ</h3>
+                                <p class="text-sm font-bold text-slate-500">الميل المتوسط للادخار</p>
+                            </div>
+                            <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full font-black text-sm">APS</span>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="text-slate-700"><strong>المعنى:</strong> نسبة الادخار الكلي إلى الدخل الكلي.</p>
+                            <div class="bg-indigo-50 p-3 rounded-lg border border-indigo-200 text-center">
+                                <span class="block text-xs text-indigo-600 font-bold mb-1">القانون:</span>
+                                <strong class="text-xl text-indigo-900">م م خ = 1 - م م س</strong>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg border border-red-200 text-sm text-red-900">
+                                <strong>تحذير:</strong> اوعى تجمع (حدي) مع (متوسط). القانون بيقول: حدي+حدي=1، أو متوسط+متوسط=1.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: ASHRAF SUMMARY (الملخص الكامل) -->
+            <section id="summary" class="mb-16 scroll-mt-24">
+                <div class="flex items-center justify-between mb-8 bg-brand-primary p-6 rounded-xl shadow-lg text-white">
+                    <div class="flex items-center gap-4">
+                        <span class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-book-open"></i>
+                        </span>
+                        <div>
+                            <h2 class="text-3xl font-black m-0 border-none pb-0">ملخص مبادئ الاقتصاد الزراعي</h2>
+                            <p class="text-blue-100 font-bold mt-1">المحتوى الكامل للملخص المرسل (ASHRAF)</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:block bg-white text-brand-primary px-4 py-2 rounded-lg font-black text-sm shadow">
+                        إعداد: عبدالرحمن احمد محمد 780
+                    </div>
+                </div>
+
+                <!-- الفصل الأول -->
+                <div class="content-card border-r-8 border-r-blue-600">
+                    <h3 class="text-2xl text-blue-800 border-b pb-3 mb-4">الفصل الأول: مدخل للاقتصاد الزراعي</h3>
+                    <ul class="ashraf-list">
+                        <li>العلم يرتكز على قواعد ونظريات عامة قابلة للتطبيق.</li>
+                        <li>الفن يعتمد على الاجتهاد واالبتكار والتفنن واالبداع الشخصي.</li>
+                        <li>العلوم الذي يهتدى بها االنسان في ادراك الظواهر الكونية هي العلوم البحته.</li>
+                        <li>العلوم الذي يهتدى بها االنسان في السيطرة على القوي الكونية هي العلوم التطبيقية.</li>
+                        <li>يعد علم االقتصاد الزراعي جزء تطبيقى من علم االقتصاد.</li>
+                        <li>يختص علم االقتصاد الزراعي في انتاج المنتجات الزراعية لتحقيق أكبر درجة من االشباع لحاجات األفراد في المجتمع.</li>
+                        <li>تعريف االقتصاد الزراعي هو أحد فروع علم االقتصاد الذي يهتم بكيفية تطبيق االقتصاد في اإلنتاج الزراعي وذلك باالستخدام األمثل للموارد مثل االستخدام األمثل لالالت الزراعية في مختلف مراحل اإلنتاج.</li>
+                        <li>يعتبر علم االقتصاد الزراعي من العلوم الحديثة التي ظهرت مع ظهور المشاكل االقتصادية الزراعية التي صاحبت الثورة الصناعية.</li>
+                        <li><strong>من أوائل الباحثين الذين وضعوا أسس االقتصاد الزراعي هم:</strong> جيمس كى كيرد، جيمس مارشال، روالند بروثيرو.</li>
+                        <li><strong>أولي الجامعات األمريكية التي درست علم االقتصاد الزراعي هي:</strong> Wisconsin, Harvard, Cornell.</li>
+                        <li>كان البروفسير <strong>Henry Taylor</strong> أستاذ االقتصاد الزراعي في جامعة Wisconsin أول من ألف كتابا في هذا الموضوع.</li>
+                        <li>وأيضا البروفسور <strong>Thomas carver</strong> أستاذ االقتصاد في جامعة Harvard اذ نشر كتاب في مبادى االقتصاد الزراعي.</li>
+                    </ul>
+                    
+                    <div class="mt-6 bg-slate-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-slate-800 mb-3">فروع علم االقتصاد الزراعي:</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm font-bold text-slate-600">
+                            <span>• اقتصاد اإلنتاج الزراعي</span>
+                            <span>• التسويق الزراعى</span>
+                            <span>• السياسة الزراعية</span>
+                            <span>• اقتصاد االراضى الزراعية</span>
+                            <span>• التعاون الزراعي</span>
+                            <span>• اإلصالح الزرعي</span>
+                            <span>• إدارة االعمال الزراعية</span>
+                            <span>• التنمية االقتصادية الزراعية</span>
+                            <span>• اقتصاد التصنيع الزراعي</span>
+                            <span>• التعاون واالئتمان الزراعي</span>
+                            <span>• التخطيط االقتصادي الزراعي</span>
+                            <span>• التجارة الدولية الزراعية</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="font-bold text-blue-800 mb-3 text-lg">اسهامات الزراعة المصرية (أرقام هامة):</h4>
+                        <ul class="ashraf-list">
+                            <li>تساهم الزراعة في مصر بحوالي <strong>12.18%</strong> خالل عام 2024.</li>
+                            <li>في بداية الخمسينات كانت تساهم الزراعة بنسبة <strong>70%</strong> من الناتج المحلى المصري.</li>
+                            <li>يقدر حجم االستثمارات الموجهة لقطاع الزراعة المصري حوالي <strong>82.9 مليار جنية</strong> خالل عام 2022.</li>
+                            <li>تقدر مخصصات خطة 2023 بحوالي <strong>116.6 مليار جنية</strong> بنسبة استثمارات تقدر بنحو 7% من اجمالي الخطة.</li>
+                            <li>مصر تكتفي ذاتيا في كثير من المنتجات مثل الدواجن والبيض ومعظم منتجات األلبان وبعض البقوليات واألرز وكثير من الفواكه والخضروات بفضل زيادة اإلنتاجية.</li>
+                            <li>الزراعة كانت تشكل نسبة كبيرة من صادرات مصر قبل الستينات من القرن الماضي.</li>
+                            <li>بدأ دور الزراعة في التجارة يقل مع زيادة الصادرات األخرى خاصة البترول والسياحة.</li>
+                            <li>مازالت الصادرات الزراعية تشكل نسبة كبيرة من صادرات مصر تصل الى نحو <strong>17%</strong> من جملة الصادرات السلعية الغير البترولية في عام 2024.</li>
+                            <li>بلغت الصادرات المصرية حوالي 6.80 مليون طن في يوليو 2025 بقيمة 9.20 مليار دوالر عام 2025.</li>
+                            <li>تحتل <strong>الموالح</strong> المرتبة األولى و<strong>البطاطس</strong> المرتبة الثانية من الصادرات المصرية.</li>
+                            <li>عدد السكان الذين يسكنون الريف يبلغ نسبتهم <strong>52% الى 56%</strong> من عدد سكان مصر.</li>
+                            <li>يقدر نسبة العاملين بالقطاع الزراعي نحو <strong>25% الى 28%</strong> من اجمالي القوة العاملة المصرية لعام 2025.</li>
+                            <li>يقدر عدد العمالة بالقطاع الزراعي حوالي <strong>5.232 مليون عامل</strong>.</li>
+                            <li>تمد الزراعة القطاعات األخرى بعناصر اإلنتاج كاألرض والعمل ورأس المال واإلدارة.</li>
+                            <li>تمد الزراعة الصناعات األخرى بالمواد الخامة الالزمة لها مثل: المنسوجات القطنية والكتانية وصناعة السكر وصناعة ضرب األرز والزيت والصابون واألعالف والنشأ.</li>
+                            <li>تساهم الزراعة في حركة التنمية االقتصادية من خالل امكان تحويل رؤوس األموال الزراعية الي الصناعات الغير الزراعية.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 bg-amber-50 p-4 rounded-lg border border-amber-100">
+                        <h4 class="font-bold text-amber-900 mb-2">العوامل المؤثرة على استثمار الزراع أموالهم خارج الزرعة:</h4>
+                        <ul class="list-disc mr-5 text-amber-800 font-bold space-y-1">
+                            <li>مستوي الدخل الزراعي</li>
+                            <li>ميل الزراع لالدخار</li>
+                            <li>مستوي اإلنتاجية الزراعية</li>
+                            <li>مدي عدالة توزيع الدخول الزراعية</li>
+                            <li>نظم الحيازة الزراعية</li>
+                            <li>مدي التقدم الفني في الزراعة</li>
+                            <li>مدي وفرة االستثمار خارج الزراعة</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="font-bold text-blue-800 mb-3 text-lg">مشكلة الغذاء واألمن الغذائي:</h4>
+                        <ul class="ashraf-list">
+                            <li>مشكلة الغذاء تكمن في عدم قدرة البلد في تلبية المتطلبات الدنيا للفرد في مدة زمنية معينة.</li>
+                            <li>يعرف األمن الغذائي بأنه مصطلح يشير الى اقتراب افراد المجتمع من الحصول على متطلباتهم الغذائية في الزمن الذي يحتاجونه.</li>
+                            <li>هناك عنصرين أساسين لضمان عالج مشكلة الغذاء: ضرورة توفير االحتياجات والمتطلبات الغذائية، وضرورة تحقيق األمن الغذائي على ثالث مستويات وهى الدولة واالقليم واألسره.</li>
+                            <li>يشير مصطلح االكتفاء الذاتي الى األهمية النسبية للناتج المحلي من الغذاء الى اجمالي االستهالك المحلي في مجتمع معين.</li>
+                        </ul>
+                        
+                        <div class="grid md:grid-cols-3 gap-4 my-4">
+                            <div class="bg-green-50 p-3 rounded border border-green-200 text-center">
+                                <strong class="block text-green-900 mb-1">االكتفاء الذاتي االمن</strong>
+                                <span class="text-sm text-green-800">اإلنتاج المحلي ≥ المتاح لالستهالك</span>
+                            </div>
+                            <div class="bg-yellow-50 p-3 rounded border border-yellow-200 text-center">
+                                <strong class="block text-yellow-900 mb-1">العجز الغذائي االمن</strong>
+                                <span class="text-sm text-yellow-800">اإلنتاج > نصف المتاح</span>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded border border-red-200 text-center">
+                                <strong class="block text-red-900 mb-1">العجز الغذائي الخطر</strong>
+                                <span class="text-sm text-red-800">اإلنتاج < نصف المستهلك</span>
+                            </div>
+                        </div>
+
+                        <ul class="ashraf-list">
+                            <li>تعرف الفجوة الغذائية بأنها الفرق بي االنتاج المحى ل من الغذاء ومتطلبات أفراد المجتمع منه خلل فبة زمنية محددة.</li>
+                            <li><strong>انعدام األمن الغذائي العابر:</strong> ظاهرة مؤقتة نتيجة عوامل مناخية أو تقلبات مفاجئة في أسعار الغذاء.</li>
+                            <li><strong>انعدام األمن الغذائي المزمن:</strong> تعاني منها أغلب الدول النامية نتيجة قصور دائم في الموارد االقتصادية.</li>
+                            <li>تستهدف خطة الدولة لزيادة مساحة األراضى الزراعية الى <strong>3.43 مليون فدان</strong>.</li>
+                            <li>زيادة نسبة االكتفاء الذاتي من القمح والذرة الى <strong>49%</strong>.</li>
+                            <li>زيادة نسبة االكتفاء الذاتي من الفول الى <strong>30%</strong>.</li>
+                            <li>زيادة نسبة االكتفاء الذاتي من اللحوم الحمراء الى <strong>70%</strong>.</li>
+                            <li>زيادة نسبة االكتفاء الذاتي من األسماك الى <strong>98%</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- الفصل الثاني -->
+                <div class="content-card border-r-8 border-r-green-600">
+                    <h3 class="text-2xl text-green-800 border-b pb-3 mb-4">الفصل الثاني: الموارد واإلنتاج</h3>
+                    <ul class="ashraf-list">
+                        <li><strong>تعريف الموارد االقتصادية:</strong> كل ما يمكن أن يستخدم أو يعد لالستخدام اقتصاديا من أجل اشباع الحاجات البشرية حاال أو مستقبال.</li>
+                        <li>يقصد بالموارد االقتصادية هي الموارد التي تتوفر بكميات ال تكفي اشبع الرغبات المجتمع.</li>
+                        <li>تنطوي المواد االقتصادية من الناحية التاريخية على كل من األرض والعمل ورأس المال واإلدارة.</li>
+                        <li><strong>الموارد المختزنة:</strong> موارد تحتوي على خدمات مختزنة، قد تستنفد نهائياً، يمكن تخزينها للمستقبل.</li>
+                        <li><strong>الموارد المتدفقة:</strong> موارد تحتوي على خدمات مستمرة (مثل الشمس)، إذا لم تستعمل تضيع (ال يمكن تخزينها).</li>
+                        <li><strong>الموارد المتدفقة والمختزنة:</strong> تحتوي على خدمات متدفقة ومختزنة (مثل االالت والمباني والمعدات).</li>
+                        <li><strong>خصائص الموارد االقتصادية:</strong> ندرة الموارد، يسهم المورد الواحد في انتاج عدة سلع (تخصيص)، تحتاج السلعة الواحدة الستخدام عدة موارد (االحالل).</li>
+                        <li><strong>تعريف الندرة:</strong> أغلب الموارد االقتصادية محدودة الكمية مقارنة بكميات وأعداد السلع المتوقع انتاجها. الموارد المتوفرة بحيث يمكن الحصول عليها ال تعد موارد اقتصادية.</li>
+                    </ul>
+
+                    <div class="mt-6 bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-green-900 mb-3">الخصائص المميزة لمورد األرض:</h4>
+                        <ul class="ashraf-list">
+                            <li>ذات قدرة عالية على االنتقال الوظيفى.</li>
+                            <li>موقعها ثابت مما يجعلها غير قابلة لالنتقال الفيزيقي.</li>
+                            <li>عدم وجود نفقة النتاج األرض بحالتها الطبيعية.</li>
+                            <li>الثبات النسبي لكمية األرض.</li>
+                            <li>ذات معدل استهالكي سالب.</li>
+                            <li>تتسم الموارد األرضية بتنوعها وعدم تجانسها.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6">
+                        <ul class="ashraf-list">
+                            <li>تبلغ مساحة مصر حوالى 244 مليون فدان.</li>
+                            <li>بلغت المساحات الزراعية في مصر حوالي 9.7 مليون فدان في عام 2025.</li>
+                            <li>تستهدف استراتيجية التنمية الزراعية المستدامة استصالح نحو 3.1 مليون فدان حتى عام 2030.</li>
+                            <li><strong>السعة المزرعية:</strong> تقاس بمقدار عناصر اإلنتاج المزرعية الثابتة مجتمعة (عادة تقاس بمقدار عنصر األرض).</li>
+                            <li><strong>السعة المزرعية المثلي:</strong> هي تلك السعة التي تؤدي في ظل ثبات العوامل األخرى الى تعظيم معدل الدخل المزرعي.</li>
+                            <li><strong>الرغبات اإلنسانية:</strong> شي يساور نفس االنسان أو الفرد ويحاول اشباعها. سماتها: التباين، االحالل، القابلية لالشباع، التعدد، التجدد، التنوع.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <h4 class="font-bold text-slate-800 mb-3">اإلنتاج والتكاليف (نظريات هامة):</h4>
+                        <ul class="ashraf-list">
+                            <li><strong>اإلنتاج:</strong> إضافة منفعة جديدة الى السلعة أو تحويل المدخالت الى المخرجات.</li>
+                            <li><strong>الفترة القصيرة جداً:</strong> ال تستطيع المنشاة أن تغير الكمية التي تنتجها (عرض عديم المرونة).</li>
+                            <li><strong>الفترة القصيرة:</strong> كافية لتغيير معدالت االنتاج فقط (وليس السعة).</li>
+                            <li><strong>الفترة الطويلة:</strong> كافية لتغيير كل من معدالت اإلنتاج والسعة اإلنتاجية.</li>
+                            <li><strong>قانون تناقص الغلة:</strong> بإضافة وحدات متتالية ومتماثلة من عنصر انتاجي متغير مع ثبات باقي العناصر، فان الناتج الكلي يتزايد في البداية بمعدل متزايد ثم بمعدل متناقص ثم يتناقص.</li>
+                        </ul>
+
+                        <!-- الجدول الهام -->
+                        <div class="overflow-x-auto mt-4">
+                            <table class="w-full text-sm text-right border-collapse bg-white">
+                                <thead>
+                                    <tr class="bg-slate-200">
+                                        <th class="p-2 border">المرحلة</th>
+                                        <th class="p-2 border">الخصائص</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="p-2 border font-bold">المرحلة األولى</td>
+                                        <td class="p-2 border">
+                                            - تبدأ من الصفر.<br>
+                                            - يزداد الناتج الكلي بمعدل متزايد ثم متناقص.<br>
+                                            - الناتج الحدي > الناتج المتوسط.<br>
+                                            - يصل الناتج الحدي ألقصاه قبل الناتج المتوسط.<br>
+                                            - المرونة > 1.<br>
+                                            - تنتهي بتساوي الناتج الحدي مع المتوسط.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 border font-bold bg-green-100">المرحلة الثانية (االقتصادية)</td>
+                                        <td class="p-2 border bg-green-50">
+                                            - تبدأ بتقاطع الحدي مع المتوسط.<br>
+                                            - يزداد الناتج الكلي بمعدل متناقص.<br>
+                                            - الحدي والمتوسط يتناقصان.<br>
+                                            - يصل الناتج الحدي للصفر عند نهاية المرحلة.<br>
+                                            - المرونة < 1.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 border font-bold">المرحلة الثالثة</td>
+                                        <td class="p-2 border">
+                                            - تبدأ عندما الناتج الحدي = صفر.<br>
+                                            - الناتج الكلي يتناقص.<br>
+                                            - الناتج الحدي سالب.<br>
+                                            - المرونة < 0.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <ul class="ashraf-list">
+                            <li><strong>قانون غلة الحجم:</strong> زيادة الكميات المستخدمة من جميع عناصر اإلنتاج تؤدي الى زيادة حجم اإلنتاج الكلي. (تزايد، ثبات، تناقص غلة الحجم).</li>
+                            <li><strong>منحني الناتج المتساوي:</strong> يضم مختلف التوليفات الممكنة من عنصري انتاج متغيرين وتعطي نفس المستوي من اإلنتاج. خصائصه: ينحدر ألسفل، محدب تجاه نقطة األصل، ال يتقاطع.</li>
+                            <li><strong>خط التكلفة المتكأفي:</strong> يوضح القيد االنفاقي المفروض على المنتج.</li>
+                            <li><strong>الممر التوسعى األمثل:</strong> يضم جميع النقاط التي يتعادل عندها ميل منحني الناتج المتساوي مع ميل خط التكلفة المتساوي.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 bg-red-50 p-4 rounded-lg border border-red-100">
+                        <h4 class="font-bold text-red-900 mb-3">أنواع التكاليف:</h4>
+                        <ul class="ashraf-list">
+                            <li><strong>التكاليف الثابتة:</strong> ال يمكن تغييرها في الفترة القصيرة.</li>
+                            <li><strong>التكاليف المتغيرة:</strong> تزيد بزيادة اإلنتاجية.</li>
+                            <li><strong>التكاليف الكلية:</strong> مجموع الثابتة والمتغيرة.</li>
+                            <li><strong>التكاليف الحدية:</strong> مقدار التغير في التكاليف الكلية (أو ما تضيفه الوحدة األخيرة).</li>
+                            <li><strong>في المدي الطويل:</strong> كل التكاليف تعتبر متغيرة.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- الفصل الثالث -->
+                <div class="content-card border-r-8 border-r-purple-600">
+                    <h3 class="text-2xl text-purple-800 border-b pb-3 mb-4">الفصل الثالث: الطلب والعرض</h3>
+                    <ul class="ashraf-list">
+                        <li><strong>المنفعة:</strong> مقدار االشباع المحقق لدي المستهلك. أنواعها: شكلية، مكانية، زمانية، حيازية، معلوماتية، خدمية.</li>
+                        <li><strong>السلع:</strong> مجانية، اقتصادية، استهالكية، إنتاجية.</li>
+                        <li><strong>الطلب:</strong> الرغبة المصحوبة بالمقدرة على الشراء.</li>
+                        <li><strong>أنواع الطلب:</strong> فردي وإجمالي، فعال وغير فعال، مباشر وغير مباشر، طلب المنتج والمستهلك، مشترك، مشتق، متنافس.</li>
+                        <li><strong>قانون الطلب:</strong> عالقة عكسية بين السعر والكمية المطلوبة.</li>
+                        <li><strong>انكماش الطلب:</strong> االنتقال على نفس المنحنى نتيجة ارتفاع الثمن.</li>
+                        <li><strong>تمدد الطلب:</strong> االنتقال على نفس المنحنى نتيجة انخفاض الثمن.</li>
+                    </ul>
+
+                    <div class="mt-6 bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-purple-900 mb-3">أنواع المرونات (كما في نص أشرف):</h4>
+                        <ul class="ashraf-list">
+                            <li><strong>مرونة الطلب السعرية:</strong> درجة استجابة الكمية للسعر. العوامل المحددة: أهمية السلعة، البدائل، تعدد االستعماالت، درجة التكامل، نسبة المنفق، الزمن.</li>
+                            <li><strong>مرونة الطلب التقاطعية:</strong>
+                                <br> - موجبة = عالقة استبدالية (بدائل).
+                                <br> - سالبة = عالقة تكاملية (مكملة).
+                            </li>
+                            <li><strong>مرونة الطلب الدخلية:</strong>
+                                <br> - موجبة = سلعة عادية.
+                                <br> - سالبة = سلعة رديئة.
+                                <br> - صفر = ال عالقة.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="font-bold text-purple-800 mb-3">العرض والمنتجات الزراعية:</h4>
+                        <ul class="ashraf-list">
+                            <li><strong>العرض:</strong> الكمية التي تكون المنشأة مستعدة النتاجها عند مستوى ثمن معين.</li>
+                            <li><strong>قانون العرض:</strong> عالقة طردية بين السعر والكمية (تمدد بارتفاع السعر، انكماش بانخفاض السعر).</li>
+                            <li><strong>العوامل المحددة للعرض:</strong> نفقات اإلنتاج، ربحية المنتجات البديلة والمتصلة، التغيرات الطبيعية، أهداف المنشأ، التوقعات.</li>
+                            <li><strong>مرونة العرض السعرية:</strong> موجبة اإلشارة دائماً.</li>
+                            <li><strong>الخصائص االقتصادية للمنتجات الزراعية:</strong> موسمية اإلنتاج، الطبيعة الخاصة، صعوبة التحكم في الخواص والمقادير، ضعف مرونة الطلب والعرض، ضخامة التقلبات السعرية، الموجات اإلنتاجية.</li>
+                            <li><strong>النتائج المترتبة على الموسمية:</strong> موسمية العمل والدخل، مشاكل التمويل والنقل، موسمية الصناعات، مشكلة التوزيع الزمني.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- الفصل الرابع -->
+                <div class="content-card border-r-8 border-r-amber-600">
+                    <h3 class="text-2xl text-amber-800 border-b pb-3 mb-4">الفصل الرابع: اإلدارة المزرعية</h3>
+                    <ul class="ashraf-list">
+                        <li><strong>تعريف اإلدارة:</strong> التدبر في استخدام الموارد المتاحة استخداما مثاليا لتحقيق أهداف المشروع.</li>
+                        <li><strong>أهداف اإلدارة المزرعية:</strong> تعظيم العائد، ضبط معدلات العمل، معدلات التكاليف المثلى، أقصى كفاءة إنتاجية، االستفادة من التكنولوجيا.</li>
+                        <li><strong>مجاالت اإلدارة المزرعية:</strong> التخطيط، التنظيم (التمويل)، الرقابة، القيادة (التوجيه)، التنسيق، التسويق.</li>
+                    </ul>
+
+                    <div class="grid md:grid-cols-2 gap-6 mt-6">
+                        <div class="bg-amber-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-amber-900 mb-2">1. التخطيط الزراعي:</h4>
+                            <p class="text-sm mb-2">تحديد النمط المزرعي، توزيع الأنتجة، تقدير االحتياجات، خطة العمل اليدوي واآللي، برامج الصيانة، الضبط الزمني.</p>
+                            <div class="text-xs font-bold text-amber-800 border-t border-amber-200 pt-2">
+                                أنواع "الاليقين": سعري، إنتاجي، تكنولوجي، سياسي.
+                            </div>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-amber-900 mb-2">2. التنظيم (التمويل):</h4>
+                            <p class="text-sm">التكيف االقتصادي للوحدة، اختيار الحيازة، اختيار الزروع واألدوات، تقدير االحتياجات الرأسمالية واإليرادات.</p>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-amber-900 mb-2">3. القيادة (التوجيه):</h4>
+                            <p class="text-sm">إثارة دافعية األفراد، االتصال اليومي، عالج التعارضات، خلق روح الجماعة، الحوافز.</p>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-amber-900 mb-2">4. الرقابة المزرعية:</h4>
+                            <p class="text-sm">متابعة األنشطة، تحديد األداء المعياري، مقارنة األداء الفعلي بالمعياري، اتخاذ تصرف عالجي.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="font-bold text-amber-800 mb-3">تقييم األراضي:</h4>
+                        <ul class="ashraf-list">
+                            <li>تشتق قيمة األرض من ندرتها ومن قيمة الزروع.</li>
+                            <li><strong>القيمة اإليجارية:</strong> ثمن شراء حق استعمال والسيطرة لفترة معينة.</li>
+                            <li><strong>القيمة الرأسمالية:</strong> ثمن شراء حزمة حقوق الملكية الكاملة والسيطرة الدائمة.</li>
+                            <li><strong>طرق تثمين األراضي:</strong> الثمن الجردي، ثمن المماثلة، الثمن الكسبي، الثمن الضريبي، ثمن االستصالح.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- الفصل الخامس -->
+                <div class="content-card border-r-8 border-r-indigo-600">
+                    <h3 class="text-2xl text-indigo-800 border-b pb-3 mb-4">الفصل الخامس: اقتصاد اإلنتاج والكفاءة</h3>
+                    <ul class="ashraf-list">
+                        <li><strong>اقتصاد اإلنتاج الزراعي:</strong> علم يطبق مبادئ االختيار على استعمال موارد اإلنتاج لتعظيم اإلنتاج أو تقليل التكاليف.</li>
+                        <li><strong>األهداف:</strong> مساعدة الزراع على تعظيم العائد الصافي، وتسهيل أكفأ استخدام للموارد.</li>
+                        <li><strong>الكفاءة:</strong> نسبة المخرجات إلى المدخالت.</li>
+                        <li><strong>الكفاءة االقتصادية:</strong> محصلة الكفاءة اإلنتاجية والكفاءة السعرية (التوزيعية).</li>
+                        <li><strong>تقدير الكفاءة:</strong> مدخل اإليرادات والتكاليف، المدخل الحدي، البرمجة (Simplex).</li>
+                    </ul>
+
+                    <div class="mt-6 bg-indigo-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-indigo-900 mb-3">مفاهيم هامة عن الكفاءة:</h4>
+                        <ul class="ashraf-list text-sm">
+                            <li><strong>عدم الكفاءة الفنية (TIE):</strong> فشل المؤسسة في الوصول ألقصى إنتاج ممكن من نفس الموارد.</li>
+                            <li><strong>عدم الكفاءة التوزيعية (AIE):</strong> التوليفات المستخدمة ال تحقق تدنية التكاليف.</li>
+                            <li><strong>الكفاءة الفنية (TE):</strong> التوليفات المستخدمة هي المثلى.</li>
+                            <li><strong>الكفاءة التوزيعية (AE):</strong> التوليفات تحقق تدنية التكاليف.</li>
+                            <li><strong>الكفاءة االقتصادية (EE):</strong> التوليفات تحقق تعظيم اإلنتاج في ظل األسعار السائدة.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: ANALYSIS (تحليل بنك الأسئلة) -->
+            <section id="analysis" class="mb-16 scroll-mt-24">
+                <div class="flex items-center gap-4 mb-8 bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                    <span class="w-12 h-12 bg-brand-danger text-white rounded-lg flex items-center justify-center text-2xl shadow-md">
+                        <i class="fa-solid fa-microscope"></i>
+                    </span>
+                    <div>
+                        <h2 class="text-3xl font-black text-slate-800 m-0">تحليل بنك الأسئلة (الخلاصة)</h2>
+                        <p class="text-slate-500 font-bold">هنا جمعنا لك كل الأفكار اللي جت في أسئلة الصح والخطأ والاختياري عشان متتوهش.</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- أخطاء شائعة -->
+                    <div class="content-card border-t-4 border-t-brand-danger">
+                        <h3 class="text-xl font-black text-brand-danger mb-4 flex items-center">
+                            <i class="fa-solid fa-circle-xmark ml-2"></i> أخطاء لازم تتجنبها
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="bg-red-50 p-3 rounded-lg border border-red-100">
+                                <strong class="block text-red-900">تعريف التضخم:</strong>
+                                <span class="text-sm text-red-800">هو ارتفاع الأسعار مع <span class="underline font-bold">انخفاض</span> القوة الشرائية للنقود (وليس زيادتها).</span>
+                            </li>
+                            <li class="bg-red-50 p-3 rounded-lg border border-red-100">
+                                <strong class="block text-red-900">السلع البديلة والمكملة:</strong>
+                                <span class="text-sm text-red-800">الشاي والسكر (مكملة/تكاملية). اللحم والدجاج (بديلة/تنافسية).</span>
+                            </li>
+                            <li class="bg-red-50 p-3 rounded-lg border border-red-100">
+                                <strong class="block text-red-900">مضاعف الاستثمار:</strong>
+                                <span class="text-sm text-red-800">يساوي مقلوب الميل الحدي <span class="underline font-bold">للادخار</span> (وليس الاستهلاك).</span>
+                            </li>
+                            <li class="bg-red-50 p-3 rounded-lg border border-red-100">
+                                <strong class="block text-red-900">دالة كوب دوجلاس:</strong>
+                                <span class="text-sm text-red-800">الأسس تمثل <span class="underline font-bold">مرونات الإنتاج</span> (وليس النواتج الحدية).</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- ثوابت هامة -->
+                    <div class="content-card border-t-4 border-t-brand-success">
+                        <h3 class="text-xl font-black text-brand-success mb-4 flex items-center">
+                            <i class="fa-solid fa-circle-check ml-2"></i> ثوابت الامتحان
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="bg-green-50 p-3 rounded-lg border border-green-100">
+                                <strong class="block text-green-900">المرونة السعرية:</strong>
+                                <span class="text-sm text-green-800">إشارتها دايماً <span class="font-bold">سالبة</span> (علاقة عكسية).</span>
+                            </li>
+                            <li class="bg-green-50 p-3 rounded-lg border border-green-100">
+                                <strong class="block text-green-900">توازن المستهلك:</strong>
+                                <span class="text-sm text-green-800">المنفعة الحدية = السعر × منفعة النقود.</span>
+                            </li>
+                            <li class="bg-green-50 p-3 rounded-lg border border-green-100">
+                                <strong class="block text-green-900">المرحلة الاقتصادية:</strong>
+                                <span class="text-sm text-green-800">الإنتاج الرشيد يكون في المرحلة <span class="font-bold">الثانية</span> فقط.</span>
+                            </li>
+                            <li class="bg-green-50 p-3 rounded-lg border border-green-100">
+                                <strong class="block text-green-900">المنافسة الكاملة:</strong>
+                                <span class="text-sm text-green-800">شرط التوازن: السعر = العائد الحدي = التكاليف الحدية.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: MICROECONOMICS -->
+            <section id="micro" class="mb-16 scroll-mt-24">
+                <div class="flex items-center gap-4 mb-8 bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                    <span class="w-12 h-12 bg-brand-success text-white rounded-lg flex items-center justify-center text-2xl shadow-md">
+                        <i class="fa-solid fa-shop"></i>
+                    </span>
+                    <h2 class="text-3xl font-black text-slate-800 m-0">شرح الاقتصاد الجزئي</h2>
+                </div>
+
+                <!-- المرونات -->
+                <div class="content-card">
+                    <h3 class="text-2xl text-slate-800 border-b pb-3 mb-4">أنواع المرونات (هام جداً)</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-right mt-2 border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100">
+                                    <th class="p-3 border font-black">نوع المرونة</th>
+                                    <th class="p-3 border font-black">الإشارة / القيمة</th>
+                                    <th class="p-3 border font-black">المعنى (مثال الامتحان)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-3 border font-bold">سعرية</td>
+                                    <td class="p-3 border text-red-600 font-bold">سالبة دائماً</td>
+                                    <td class="p-3 border">
+                                        > 1 = مرن.<br>
+                                        < 1 = غير مرن.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 border font-bold">تقاطعية</td>
+                                    <td class="p-3 border font-bold">
+                                        <span class="text-green-600">موجبة (+)</span>
+                                        <hr class="my-1 border-slate-200">
+                                        <span class="text-red-600">سالبة (-)</span>
+                                    </td>
+                                    <td class="p-3 border">
+                                        (+) سلع بديلة (لحم ودجاج).<br>
+                                        (-) سلع مكملة (شاي وسكر).
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 border font-bold">دخلية</td>
+                                    <td class="p-3 border">موجبة / سالبة</td>
+                                    <td class="p-3 border">
+                                        > 1 = كمالية.<br>
+                                        < 1 = ضرورية.<br>
+                                        سالبة = رديئة.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: MACROECONOMICS -->
+            <section id="macro" class="mb-16 scroll-mt-24">
+                <div class="flex items-center gap-4 mb-8 bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                    <span class="w-12 h-12 bg-brand-secondary text-white rounded-lg flex items-center justify-center text-2xl shadow-md">
+                        <i class="fa-solid fa-globe"></i>
+                    </span>
+                    <h2 class="text-3xl font-black text-slate-800 m-0">شرح الاقتصاد الكلي</h2>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="text-2xl text-slate-800 border-b pb-3 mb-4">المضاعفات وتوازن الدخل</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h4 class="font-bold mb-3">أنواع المضاعفات:</h4>
+                            <ul class="space-y-2 text-sm font-bold">
+                                <li class="flex justify-between text-brand-secondary">
+                                    <span>مضاعف الاستثمار:</span>
+                                    <span>موجب (1 / MPS)</span>
+                                </li>
+                                <li class="flex justify-between text-brand-secondary">
+                                    <span>مضاعف الإنفاق الحكومي:</span>
+                                    <span>موجب</span>
+                                </li>
+                                <li class="flex justify-between text-brand-secondary">
+                                    <span>مضاعف المدفوعات التحويلية:</span>
+                                    <span>موجب</span>
+                                </li>
+                                <li class="flex justify-between text-brand-danger">
+                                    <span>مضاعف الضرائب:</span>
+                                    <span>سالب (عكسي)</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h4 class="font-bold mb-3">شروط التوازن:</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li class="bg-white p-2 rounded border border-slate-200">
+                                    <strong>نموذج قطاعين (مغلق):</strong><br>
+                                    الادخار = الاستثمار (S = I)
+                                </li>
+                                <li class="bg-white p-2 rounded border border-slate-200">
+                                    <strong>نموذج 3 قطاعات:</strong><br>
+                                    الادخار + الضرائب = الاستثمار + الإنفاق الحكومي
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        function setActive(element) {
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
